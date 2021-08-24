@@ -1,0 +1,24 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 my-3">
+                <%- include ('includes/messages') %> 
+                <h1 class="text-left"><%= title %> </h1>
+                <h1 class="text-left  lead">Bem vindo <i> <%= title %> </i>, um site muito básico desenvolvido por Gabriel Rafaiel Bercelline em Express, para a prática na criação de Projetos, utilizando javascript. A criação do site se baseou em tutoriais.</h1>
+                <div >
+                    <p> A livraria têm em seu registro a seguinte contagem total: </p>
+                    <ul>
+                        <li><strong>Livros:</strong> <%= data.book_count %> </li>
+                        <li><strong>Cópias:</strong> <%= data.book_instance_count %> </li>
+                        <li><strong>Cópias Disponíveis:</strong> <%= data.book_instance_available_count %> </li>
+                        <li><strong>Autores:</strong> <%= data.author_count %> </li>
+                        <li><strong>Genêros:</strong> <%= data.genre_count %> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+<%- include('includes/footer'); %>

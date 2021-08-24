@@ -1,0 +1,25 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+                <div class="col-lg-8 my-2">
+                    <%- include('includes/messages'); %>
+                    <h1 class="text-left"><%= title %> </h1>
+                    <% for(let i = 0; i < genre_list.length; i++) { %>
+                        <% const genre = genre_list[i] %> 
+                        <li>
+                            <a href=<%= genre.url %> > 
+                                <%= genre.name %> 
+                            </a>
+                        </li>                                                
+                    <% } %>
+                    <% if (!genre_list.length) { %>
+                        <p> Não há nenhum gênero de livro nesta Livraria. </p> 
+                    <% } %>
+                </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    
+<%- include('includes/footer'); %>

@@ -1,0 +1,75 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="column">
+            <div class="col-lg-2"></div>
+            <h1 class="text-left">Título: <%= book.title %> </h1>
+
+            <p>
+                <span class="font-weight-bold"> Autor: </span> <a href=<%= book.author.url %> > <%= book.author.name %> </a>
+            </p>
+            <p>
+                <span class="font-weight-bold"> Sumário: </span> <%= book.summary %> 
+            </p>
+            <p>
+                <span class="font-weight-bold"> Código: </span> <%= book.isbn %> 
+            </p>
+            <p>
+                <span class="font-weight-bold"> Genêro: </span> 
+                <% for (let i = 0; i < book.genre.length; i++) { %>
+                    <% const val = book.genre[i] %> 
+                    <a href=<%= val.url %> > <%= val.name %> </a>
+                        <% if (i < (book.genre.length -1)) { %>
+                            , 
+                        <% } %>
+                <% } %>
+            <div class="row">
+                <div style="margin-left: 20px; margin-top: 20px;">
+                    <h4>Cópias</h4>
+                    <% for(let i = 0; i < book_instances.length; i++) { %>
+                        <% const book = book_instances[i] %> 
+                        <hr>
+                            <% if ( book.status == 'Available' ) { %>
+                                <span class="text-success font-weight-bold">  Disponível  </span>
+                            <% } else if ( book.status == 'Maintenance' ) { %>
+                                <span class="text-danger font-weight-bold">  Manutenção  </span>
+                            <% } else { %>
+                                <span class="text-warning font-weight-bold">  Emprestado  </span>
+                            <% } %> 
+                            <p>
+                                <span class="font-weight-bold"> Impresso: </span> 
+                                <%= book.imprint %> 
+                            </p>
+                            <p>
+                                <% if (book.status != 'Available') { %>
+                                    <span class="font-weight-bold"> Pego: </span> <%= book.due_back_formatted %>
+                                <% } %>
+                            </p>
+                            <p > 
+                            <span class="font-weight-bold"> Id: </span>
+                                <a href=<%= book.url %> >
+                                <%= book.id %> 
+                                </a>
+                            </p>
+                        <% if (!book) { %>
+                            <p> Não há cópias deste livro na livraria. </p> 
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+            <hr>
+                <div class="col-lg-2">
+                    <% if(user) { %> 
+                        <p>
+                            <a class="text-danger" href=<%=book.url+'/delete'%>> <span class="font-weight-bold"> Deletar Livro </span> </a>
+                        </p>
+                        <p>
+                            <a class="text-warning" href=<%=book.url+'/update'%>> <span class="font-weight-bold"> Atualizar Livro </span> </a>
+                        </p>
+                    <% } %>
+                </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    
+<%- include('includes/footer'); %>

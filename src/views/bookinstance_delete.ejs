@@ -1,0 +1,20 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+                <div class="col-lg-8 my-2">
+                    <h1 class="text-left"><%= title %> </h1>
+                    <p><span class="font-weight-bold">Você realmente quer <%= title %> <%=bookinstance._id%> ?</span></p>
+                    <form action="" method="post">
+                        <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                        <div class="form-group">
+                            <input type="hidden" id="bookinstanceid" name="bookinstanceid" class="form-control" value=<%=bookinstance._id%> >
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+<%- include('includes/footer'); %>

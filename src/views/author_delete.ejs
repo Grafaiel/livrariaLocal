@@ -1,0 +1,46 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+                <div class="col-lg-8 my-2">
+                    <h1 class="text-left"><%= author.name %> </h1>
+                    <p> <%= author.lifespan %> </span></p>
+
+                    <% if (author_books.length) { %>
+                        <% if (author_books.length === 1) { %>
+                            <p> <span class="font-weight-bold"> Delete o livro deste autor antes de tentar deleta-lo.</span></p> 
+                        <% } else { %>
+                            <p> <span class="font-weight-bold"> Delete os livros deste autor antes de tentar deleta-lo.</span></p>
+                        <% } %>
+                        <div style='margin-left:20px;margin-top:20px'>
+                            <h4>Livros</h4>
+                            <dl>
+                                <% for(let i = 0; i < author_books.length; i++) { %>
+                                    <% const book = author_books[i] %> 
+                                        <dt>
+                                            <a href=<%= book.url %> > 
+                                                <%= book.title %> 
+                                            </a>
+                                        </dt>
+                                        <dd> <%= book.summary %> </dd>
+                                <% } %>
+                            </dl>
+                        </div>
+                    <% } else { %>
+                        <p><span class="font-weight-bold">Você realmente quer deletar este autor?</span></p>
+                        <form action="" method="post">
+                            <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                            <div class="form-group">
+                                <input type="hidden" id="authorid" name="authorid" class="form-control" value=<%=author._id%> >
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+
+                    <% } %>
+                </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    
+<%- include('includes/footer'); %>

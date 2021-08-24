@@ -1,0 +1,33 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 my-5">
+            <h1> <%= title %> </h1>
+            <form action="" method="POST">
+                <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                <div class="form-group">
+                    <label > Primeiro Nome: </label>
+                    <span class="text-danger" > <%= ( undefined===author ? '' : author.first_name) %> </span>
+                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder='Nome do Autor'>
+                    <label for="family_name">Segundo Nome:</label>
+                    <span class="text-danger" > <%= ( undefined===author ? '' : author.family_name) %> </span>
+                    <input type="text" name="family_name" id="family_name" class="form-control" placeholder="Segundo nome do Autor">
+                </div>
+                <div class="form-group">
+                    <label for="date_of_birth">Dia do Nascimento: </label>
+                    <span class="text-danger" > <%= ( undefined===author ? '' : author.birth) %> </span>
+                    <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" placeholder="dd/mm/aaaa">
+                    <label for="date_of_death">Dia da Morte: </label>
+                    <span class="text-danger" > <%= ( undefined===author ? '' : author.death) %> </span>
+                    <input type="date" name="date_of_death" id="date_of_death" class="form-control" placeholder="dd/mm/aaaa">
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <%- include('includes/error-forms'); %>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+<%- include('includes/footer'); %>

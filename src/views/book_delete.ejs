@@ -1,0 +1,51 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+                <div class="col-lg-8 my-2">
+                    <h1 class="text-left"><%= title %> <a href=<%= book.url %>> <%= book.title %> </a> </h1>
+
+                    <% if (book_instances.length) { %>
+                        <% if (book_instances.length === 1) { %>
+                            <p> <span class="font-weight-bold">Delete a Cópia deste Livro antes de tentar deleta-lo.</span></p> 
+                        <% } else { %>
+                            <p> <span class="font-weight-bold">Delete as Cópias deste Livro antes de tentar deleta-lo.</span></p>
+                        <% } %>
+                        <div style='margin-left:20px;margin-top:20px'>
+                            <h4>Cópias</h4>
+                            <dl>
+                                <% for(let i = 0; i < book_instances.length; i++) { %>
+                                    <% const instance = book_instances[i] %> 
+                                        <dt>
+                                            <p> <span class="font-weight-bold" > ID: </span>
+                                                <a href=<%= instance.url %> > 
+                                                    <%= instance.id %> 
+                                                </a>
+                                            </p>
+                                        </dt>
+                                        <dd>
+                                            <p> <span class="font-weight-bold" > Impresso: </span>
+                                                <%= instance.imprint %> 
+                                            </p>
+                                        </dd>
+                                <% } %>
+                            </dl>
+                        </div>
+                    <% } else { %>
+                        <p><span class="font-weight-bold">Você realmente quer deletar <%= book.title %>?</span></p>
+                        <form action="" method="post">
+                            <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                            <div class="form-group">
+                                <input type="hidden" id="bookid" name="bookid" class="form-control" value=<%=book._id%> >
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+
+                    <% } %>
+                </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    
+<%- include('includes/footer'); %>

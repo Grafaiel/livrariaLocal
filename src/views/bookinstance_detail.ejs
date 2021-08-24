@@ -1,0 +1,44 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-left"> Id: <%= bookinstance._id %> </h1>
+                    <p> 
+                        <span class="font-weight-bold"> Título: </span>
+                        <a href=<%= bookinstance.book.url %> > <%= bookinstance.book.title %> </a>
+                    </p>
+                    <p> 
+                        <span class="font-weight-bold"> Impresso: </span>
+                        <%= bookinstance.imprint %> </a>
+                    </p>
+                    <p> 
+                        <span class="font-weight-bold"> Situação: </span>
+                        <% if ( bookinstance.status == 'Available' ) { %>
+                            <span class="text-success">  Disponível  </span>
+                        <% } else if ( bookinstance.status == 'Maintenance' ) { %>
+                            <span class="text-danger">  Manutenção  </span>
+                        <% } else { %>
+                            <span class="text-warning">
+                                  Emprestado  
+                            </span>
+                        <% } %> 
+                        <% if (bookinstance.status != 'Available') { %>
+                           - Pego: <%= bookinstance.due_back_formatted %>
+                        <% } %>
+                    </p>
+                </div>
+        </div>
+        <hr>
+        <div class="col-lg-2">
+            <% if(user) { %> 
+                <p>
+                    <a class="text-danger" href=<%=bookinstance.url+'/delete'%>> <span class="font-weight-bold"> Deletar Cópia </span> </a>
+                </p>
+                <p>
+                    <a class="text-warning" href=<%=bookinstance.url+'/update'%>> <span class="font-weight-bold"> Atualizar Cópia </span> </a>
+                </p>
+            <% } %>
+        </div>
+    </div>
+<%- include('includes/footer'); %>

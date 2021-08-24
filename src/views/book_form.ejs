@@ -1,0 +1,58 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 my-5">
+            <h1> <%= title %> </h1>
+            <form action="" method="POST">
+                <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                <div class="form-group">
+                    <label for="title" > Título: </label>
+                    <span class="text-danger" > <%= ( undefined===book ? '' : book.title) %> </span>
+                    <input type="text" name="title" id="title" class="form-control" placeholder='Nome do Livro'>
+                </div>
+                <div class="form-group">
+                    <label for="author">Autor:</label>
+                    <select id="author" class="form-control" type="select", name="author"   placeholder='Selelecione o Autor'>
+                        <% authors.sort(function(a, b) { %>
+                            <% let textA = a.family_name.toUpperCase(); %>
+                            <% let textB = b.family_name.toUpperCase(); %>
+                            <% return (textA < textB) ? -1 : (textA > textB) ? 1 : 0; %>
+                        <% }); %>
+                        <% for(let i = 0; i < authors.length; i++) { %>
+                            <% const author = authors[i] %> 
+                                <option value=<%= author._id %> > <%= author.name %> </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="summary">Sumário:</label>
+                    <span class="text-danger" > <%= ( undefined===book ? '' : book.summary) %> </span>
+                    <input type="textarea" name="summary" placeholder="Sumário" id="sumarry" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN:</label>
+                    <span class="text-danger" > <%= ( undefined===book ? '' : book.isbn) %> </span>
+                    <input type="text" name="isbn"  placeholder='ISBN' id="isbn" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="isbn">Genêro:</label>
+                    <div>
+                        <% for (let i = 0; i < genres.length; i++) { %>
+                            <% const genre = genres[i]; %>
+                            <div style='display: inline; padding-right:10px;'>
+                                <input type="checkbox" name="genre" id=<%= genre._id %> value=<%= genre._id %> >
+                                <label for=<%= genre._id %> class="ml-1"> <%= genre.name %> </label>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <%- include('includes/error-forms'); %>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+<%- include('includes/footer'); %>

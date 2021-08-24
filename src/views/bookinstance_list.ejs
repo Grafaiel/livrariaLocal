@@ -1,0 +1,39 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-16">
+                <%- include('includes/messages'); %>
+                <h1 class="text-left"><%= title %> </h1>
+                <% for(let i = 0; i < bookinstance_list.length; i++) { %>
+                    <% const instance = bookinstance_list[i] %> 
+                    <li>
+                        <a href=<%= instance.url %> >
+                            <%= instance.book.title %>
+                        </a>
+                            <%= instance.imprint %>
+                            <% if ( instance.status == 'Available' ) { %>
+                                <span class="text-success"> ( Disponível ) </span>
+                            <% } else if ( instance.status == 'Maintenance' ) { %>
+                                <span class="text-danger"> ( Manutenção ) </span>
+                            <% } else { %>
+                                <span class="text-warning">
+                                        ( Emprestado  ) 
+                                </span>
+                            <% } %> 
+                            <% if (instance.status != 'Available') { %>
+                                Pego: <%= instance.due_back_formatted %>
+                            <% } %>
+                            
+                    </li>                                                
+                <% } %>
+                <% if (!bookinstance_list.length) { %>
+                    <p> Não há nenhuma cópia de livro nesta Livraria. </p> 
+                <% } %>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    
+<%- include('includes/footer'); %>

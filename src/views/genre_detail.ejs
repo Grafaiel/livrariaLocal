@@ -1,0 +1,34 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+<div class="container">
+        <h1 class="text-left">Genêro: <%= genre.name %> </h1>
+        <div class="row">
+            <div style="margin-left: 20px; margin-top: 20px;">
+                <dl>
+                    <% for(let i = 0; i < genre_books.length; i++) { %>
+                        <% const book = genre_books[i] %> 
+                        <dt>
+                            <a href=<%= book.url %> > <%= book.title %> </a>
+                        </dt>                                                
+                        <dd> <%= book.summary %> </dd>
+                        <% if (!book) { %>
+                            <p> Este gênero não tem nenhum livro. </p> 
+                        <% } %>
+                    <% } %>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div class="col-lg-2">
+            <% if(user) { %> 
+                <p>
+                    <a class="text-danger" href=<%=genre.url+'/delete'%>> <span class="font-weight-bold"> Deletar Genêro </span> </a>
+                </p>
+                <p>
+                    <a class="text-warning" href=<%=genre.url+'/update'%>> <span class="font-weight-bold"> Atualizar Genêro </span> </a>
+                </p>
+            <% } %>
+        </div>
+</div>
+    
+<%- include('includes/footer'); %>

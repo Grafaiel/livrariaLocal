@@ -1,0 +1,48 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg my-5 container">
+            <h1> <%= title %> </h1>
+            <form action="" method="POST">
+                <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                <div class="form-group">
+                    <label for="book">Livro:</label>
+                    <select id="book" class="form-control" type="select", name="book"   placeholder='Selecione um Livro'>
+                        <% for(let i = 0; i < book_list.length; i++) { %>
+                            <% const book = book_list[i] %> 
+                                <option value=<%= book._id %> > <%= book.title %> </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="imprint" > Impresso: </label>
+                    <span class="text-danger" > <%= ( undefined===bookinstance ? '' : bookinstance.imprint) %> </span>
+                    <input type="text" name="imprint" id="imprint" class="form-control" placeholder='Editora'>
+                </div>
+                <div class="form-group">
+                    <label for="due_back">Data da Modificação: </label>
+                    <span class="text-danger" > <%= ( undefined===bookinstance ? '' : bookinstance.due_back_updated) %> </span>
+                    <input type="date" name="due_back" id="due_back" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="status"> Situação: </label>
+                    <select name="status" id="status" placeholder="Selecione um status" type='select'>
+                        <option class="text-warning" value="Maintenance"> Manutenção</option>
+                        <option class="text-success" value="Available">Disponível</option>
+                        <option class="text-danger" value="Loanded">Emprestado</option>
+                        <option class="" value="Reserved">Reservado</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <%- include('includes/error-forms'); %>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+    
+
+
+<%- include('includes/footer'); %>

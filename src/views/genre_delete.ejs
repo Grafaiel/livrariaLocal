@@ -1,0 +1,42 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+                <div class="col-lg-8 my-2">
+                    <h1 class="text-left"><%= genre.name %> </h1>
+                    <% if (genre_books.length) { %>
+                        <% if (genre_books.length === 1) { %>
+                            <p> <span class="font-weight-bold">Apague este livro antes de deletar o Genêro.</span></p> 
+                        <% } else { %>
+                            <p> <span class="font-weight-bold">Apague estes livros antes de deletar o Genêro.</span></p>
+                        <% } %>
+                        <div style='margin-left:20px;margin-top:20px'>
+                            <h4>Livros</h4>
+                            <dl>
+                                <% for(let i = 0; i < genre_books.length; i++) { %>
+                                    <% const book = genre_books[i] %> 
+                                        <dt>
+                                            <a href=<%= book.url %> > 
+                                                <%= book.title %> 
+                                            </a>
+                                        </dt>
+                                        <dd> <%= book.summary %> </dd>
+                                <% } %>
+                            </dl>
+                        </div>
+                    <% } else { %>
+                        <p><span class="font-weight-bold">Você realmente quer <%= title %> <%= genre.name %>?</span></p>
+                        <form action="" method="post">
+                            <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                            <div class="form-group">
+                                <input type="hidden" id="genreid" name="genreid" class="form-control" value=<%=genre._id%> >
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+                    <% } %>
+                </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+<%- include('includes/footer'); %>

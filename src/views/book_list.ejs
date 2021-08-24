@@ -1,0 +1,28 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 my-3">
+                <%- include('includes/messages'); %>
+                <h1 class="text-left"><%= title %> </h1>
+                <% book_list.sort(function(a, b) { %>
+                    <% let textA = a.title.toUpperCase(); %>
+                    <% let textB = b.title.toUpperCase(); %>
+                    <% return (textA < textB) ? -1 : (textA > textB) ? 1 : 0; %>
+                <% }); %>
+                <% for(let i = 0; i < book_list.length; i++) { %>
+                    <% const book = book_list[i] %> 
+                    <li>
+                        <a href=<%= book.url %> > <%= book.title %></a>, <span class="lead" ><%= book.author.name %></span>  
+                    </li>                                                
+                <% } %>
+                <% if (!book_list.length) { %>
+                    <p class="font-weigt-bolder"> Não há livros. </p> 
+                <% } %>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+    
+<%- include('includes/footer'); %>

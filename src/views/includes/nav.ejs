@@ -1,0 +1,74 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div id="dismiss">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+
+        <div class="sidebar-header">
+            <h3>Projeto LocalLibrary</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a class="link-bar" href="/author/create">Criar Autor</a>
+            </li>
+            <li>
+                <a class="link-bar" href="/genre/create">Criar Genêro</a>
+            </li>
+            <li>
+                <a class="link-bar" href="/book/create">Criar Livro</a>
+            </li>
+            <li>
+                <a class="link-bar" href="/bookinstance/create">Criar Cópia de Livro</a>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="/login/logout" class="article">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #7386D5; ">
+            <div class="container-fluid">
+                <% if(user) { %> 
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: #415cc9; border-color: #415cc9">
+                        <i class="fas fa-align-left"></i>
+                        <span>Edite a Livraria</span>
+                    </button>
+                <% } %>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #415cc9; border-color: #415cc9">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item active" >
+                            <a class="nav-link " style="color: #fff;" href="/authors">Autores</a>
+                        </li>
+                        <li class="nav-item active" >
+                            <a class="nav-link " style="color: #fff;" href="/genres">Genêros</a>
+                        </li>
+                        <li class="nav-item active" >
+                            <a class="nav-link " style="color: #fff;" href="/books">Livros</a>
+                        </li>
+                        <li class="nav-item active" >
+                            <a class="nav-link " style="color: #fff;" href="/bookinstances">Situação do Livro</a>
+                        </li>
+                        <li class="nav-item active" >
+                            <a class="nav-link " style="color: #fff;" href="/">Resumo</a>
+                        </li>
+                        <% if(!user) { %> 
+                            <li class="nav-item ">
+                                <a class="nav-link " style="color: rgb(212, 211, 211);" href="/login/index">Entrar</a>
+                            </li>
+                        <% } %>       
+                    </ul>
+                </div>
+            </div>
+        </nav>
